@@ -1,0 +1,19 @@
+chuy-php:
+  image: php:5.6.28-fpm
+  hostname: chuy
+  container_name: chuyPHP
+  volumes:
+    - ./src:/var/www/html
+  ports:
+    - 8080:80
+  working_dir: /var/www/html
+  links:
+    - chuy-db:mysql
+chuy-db:
+  image: mysql:5.7.16
+  container_name: chuyMySQL
+  environment:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_DATABASE=chuy
+  volumes:
+    - ./database:/db
